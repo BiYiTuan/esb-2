@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bnd-LastModified: 1380492706888
+Build-Jdk: 1.6.0_51
+Built-By: ramesh
+Bundle-ManifestVersion: 2
+Bundle-Name: esb-common
+Bundle-SymbolicName: com.boohoo.esb.esb-common
+Bundle-Version: 1.0.0.SNAPSHOT
+Created-By: Apache Maven Bundle Plugin
+Export-Package: com.boohoo.esb.common.entity;uses:="com.thoughtworks.xst
+ ream.annotations";version="1.0.0.SNAPSHOT"
+Import-Package: com.thoughtworks.xstream.annotations;version="[1.4,2)"
+Tool: Bnd-1.50.0

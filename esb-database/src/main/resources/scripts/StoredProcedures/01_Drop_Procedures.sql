@@ -1,0 +1,1 @@
+DELETE FROM mysql.proc WHERE db = 'Test' AND type = 'PROCEDURE';
