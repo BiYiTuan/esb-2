@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Licensed to the Apache Software Foundation (ASF) under one or more contributor license agreements. See the NOTICE file distributed with this work 
+	for additional information regarding copyright ownership. The ASF licenses this file to You under the Apache License, Version 2.0 (the "License"); you 
+	may not use this file except in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0 Unless 
+	required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS 
+	OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License. -->
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cm="http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.0.0"
+	xsi:schemaLocation="
+           http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd">
+
+	<cm:property-placeholder persistent-id="com.boohoo.esb.mongodb" />
+
+	
+	<bean id="orderService" class="com.boohoo.esb.mongodb.service.OrderService" />
+
+	<bean id="jsonPrettyPrintedDriver" class="com.thoughtworks.xstream.io.json.JsonHierarchicalStreamDriver" />
+	<bean id="jsonDriver" class="com.thoughtworks.xstream.io.json.JettisonMappedXmlDriver" />
+
+	<bean class="com.mongodb.Mongo" id="mydb">
+		<argument index="0" value="${mongodb.host}" />
+	</bean>
+	
+	<camelContext id="esb-mongodb" xmlns="http://camel.apache.org/schema/blueprint">
+		<dataFormats>
+			<xstream id="jsonDataFormat" encoding="UTF-8" driverRef="jsonDriver">
+			    <aliases>
+			        <alias class="com.boohoo.esb.common.entity.Order" name="order" />
+			    </aliases>
+			</xstream>
+		</dataFormats>
+		
+		<route id="order-create-mongodb" autoStartup="false">
+			<from uri="timer:foo?period=1s&amp;repeatCount=10" />
+			<transform>
+				<method ref="orderService" method="generateOrder" />
+			</transform>
+			<log message="Inserting : ${body}" />
+			<to uri="mongodb:mydb?database={{mongodb.databaseName}}&amp;collection={{mongodb.collections.orders}}&amp;operation=save&amp;writeConcern=SAFE&amp;createCollection=true" />
+		</route>
+		
+		<route id="order-count-mongodb" autoStartup="false">
+		    <from uri="timer:foo?period=1s" />
+			<to uri="mongodb:mydb?database={{mongodb.databaseName}}&amp;collection={{mongodb.collections.orders}}&amp;operation=count&amp;dynamicity=true" />
+			<log message="count : ${body}" />
+		</route>
+		
+		<route id="order-findAll-mongodb">
+		    <from uri="timer:foo?delay=1000&amp;repeatCount=2" />
+			<to uri="mongodb:mydb?database={{mongodb.databaseName}}&amp;collection={{mongodb.collections.orders}}&amp;operation=findAll&amp;dynamicity=true" />
+			<split>
+			    <simple>${body}</simple>
+				<log message="Order : ${body}" />
+			</split>
+		</route>
+
+	</camelContext>
+
+</blueprint>

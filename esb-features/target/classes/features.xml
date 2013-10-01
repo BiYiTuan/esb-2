@@ -48,17 +48,23 @@
 	</feature>
 	<feature name="esb-common" version="1.0.0-SNAPSHOT">
 		<feature version="1.0.0-SNAPSHOT">esb-database-dependencies</feature>
+		<feature version="2.10.0.fuse-71-047">camel-xstream</feature>
+		<feature version="2.10.0.fuse-71-047">camel-mybatis</feature>
+		<feature version="2.10.0.fuse-71-047">camel-mongodb</feature>
+		
 		<bundle>mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.xstream/1.4.4_1</bundle>
 		<bundle>mvn:commons-dbcp/commons-dbcp/1.4</bundle>
 		<bundle>mvn:com.boohoo.esb/esb-common/1.0.0-SNAPSHOT</bundle>
-		<feature version="2.10.0.fuse-71-047">camel-xstream</feature>
-		<feature version="2.10.0.fuse-71-047">camel-mybatis</feature>
+		
 		<feature>activemq</feature>
 	</feature>
 	<feature name="esb-mybatis" version="1.0.0-SNAPSHOT">
 		<feature version="1.0.0-SNAPSHOT">esb-common</feature>
-		<bundle>mvn:com.boohoo.esb/esb-common/1.0.0-SNAPSHOT</bundle>
 		<bundle>mvn:com.boohoo.esb/esb-mybatis/1.0.0-SNAPSHOT</bundle>
+	</feature>
+	<feature name="esb-mongodb" version="1.0.0-SNAPSHOT">
+		<feature version="1.0.0-SNAPSHOT">esb-common</feature>
+		<bundle>mvn:com.boohoo.esb/esb-mongodb/1.0.0-SNAPSHOT</bundle>
 	</feature>
 	<feature name="esb-database" version="1.0.0-SNAPSHOT">
 		<feature version="1.0.0-SNAPSHOT">esb-common</feature>

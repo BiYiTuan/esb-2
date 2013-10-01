@@ -15,8 +15,7 @@
 	<properties>
 		<private-package>com.boohoo.esb.test.*</private-package>
 		<osgi-import>
-		    *,
-		    com.boohoo.esb.database.dao
+		    *
 		</osgi-import>
 	</properties>
 	<dependencies>

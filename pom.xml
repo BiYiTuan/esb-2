@@ -12,6 +12,7 @@
 	
 	<modules>
 		<module>esb-common</module>
+		<module>esb-mongodb</module>
 		<module>esb-mybatis</module>
 		<module>esb-database</module>
 		<module>esb-features</module>

@@ -48,17 +48,23 @@
 	</feature>
 	<feature name="esb-common" version="${project.version}">
 		<feature version="${project.version}">esb-database-dependencies</feature>
+		<feature version="${camel-version}">camel-xstream</feature>
+		<feature version="${camel-version}">camel-mybatis</feature>
+		<feature version="${camel-version}">camel-mongodb</feature>
+		
 		<bundle>mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.xstream/${xstream.version}</bundle>
 		<bundle>mvn:commons-dbcp/commons-dbcp/1.4</bundle>
 		<bundle>mvn:${project.groupId}/esb-common/${project.version}</bundle>
-		<feature version="${camel-version}">camel-xstream</feature>
-		<feature version="${camel-version}">camel-mybatis</feature>
+		
 		<feature>activemq</feature>
 	</feature>
 	<feature name="esb-mybatis" version="${project.version}">
 		<feature version="${project.version}">esb-common</feature>
-		<bundle>mvn:${project.groupId}/esb-common/${project.version}</bundle>
 		<bundle>mvn:${project.groupId}/esb-mybatis/${project.version}</bundle>
+	</feature>
+	<feature name="esb-mongodb" version="${project.version}">
+		<feature version="${project.version}">esb-common</feature>
+		<bundle>mvn:${project.groupId}/esb-mongodb/${project.version}</bundle>
 	</feature>
 	<feature name="esb-database" version="${project.version}">
 		<feature version="${project.version}">esb-common</feature>
