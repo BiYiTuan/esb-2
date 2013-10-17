@@ -1,32 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<persistence xmlns="http://java.sun.com/xml/ns/persistence"
-             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
-             version="2.0">
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd" version="2.0">
 
-    <persistence-unit name="reportIncident" transaction-type="RESOURCE_LOCAL">
-         <provider>org.apache.openjpa.persistence.PersistenceProviderImpl</provider>
-         <class>com.boohoo.esb.database.dao.model.AllocatedOrderLine</class>
-         <class>com.boohoo.esb.database.dao.model.AllocatedOrder</class>
-         <class>com.boohoo.esb.database.dao.model.AllocatedStatus</class>
-         <class>com.boohoo.esb.database.dao.model.ConsumerCount</class>
-         <class>com.boohoo.esb.database.dao.model.FrontendConnection</class>
-         <class>com.boohoo.esb.database.dao.model.FrontendConnectionsAdditional</class>
-         <class>com.boohoo.esb.database.dao.model.SageMasterStock</class>
-         <class>com.boohoo.esb.database.dao.model.StockUpdateHistory</class>
-         <class>com.boohoo.esb.database.dao.model.TimerPoll</class>
-         <class>com.boohoo.esb.database.dao.model.TimerPollsAdditional</class>
-         <class>com.boohoo.esb.database.dao.model.VendaFtpCredential</class>
-         <class>com.boohoo.esb.database.dao.model.VendaSoapCredential</class>
-         <exclude-unlisted-classes>true</exclude-unlisted-classes>
-        <properties>
-             <!--   <property name="openjpa.jdbc.SynchronizeMappings"
-                      value="buildSchema(SchemaAction='createDB,dropDB,build')"/>  -->
-             <!-- To support junit from eclipse -->
-             <property name="openjpa.RuntimeUnenhancedClasses" value="supported"/>
-            <property name="openjpa.Log" value="DefaultLevel=TRACE, Runtime=TRACE, Tool=TRACE, SQL=TRACE"/>
-            <property name="openjpa.jdbc.DBDictionary" value="mysql(useSchemaName=true)"/>
-           <!--  <property name="openjpa.jdbc.Schema"  value="test"/> -->
-        </properties>
-    </persistence-unit>
+	<persistence-unit name="reportIncident" transaction-type="RESOURCE_LOCAL">
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		<class>com.boohoo.esb.database.dao.model.AllocatedOrderLine</class>
+		<class>com.boohoo.esb.database.dao.model.AllocatedOrder</class>
+		<class>com.boohoo.esb.database.dao.model.AllocatedStatus</class>
+		<class>com.boohoo.esb.database.dao.model.ConsumerCount</class>
+		<class>com.boohoo.esb.database.dao.model.FrontendConnection</class>
+		<class>com.boohoo.esb.database.dao.model.FrontendConnectionsAdditional</class>
+		<class>com.boohoo.esb.database.dao.model.SageMasterStock</class>
+		<class>com.boohoo.esb.database.dao.model.StockUpdateHistory</class>
+		<class>com.boohoo.esb.database.dao.model.TimerPoll</class>
+		<class>com.boohoo.esb.database.dao.model.TimerPollsAdditional</class>
+		<class>com.boohoo.esb.database.dao.model.VendaFtpCredential</class>
+		<class>com.boohoo.esb.database.dao.model.VendaSoapCredential</class>
+		<exclude-unlisted-classes>true</exclude-unlisted-classes>
+	</persistence-unit>
 </persistence>

@@ -4,7 +4,7 @@
 		<groupId>com.boohoo.esb</groupId>
 		<artifactId>esb-parent</artifactId>
 		<version>1.0.0-SNAPSHOT</version>
-		<relativePath>..</relativePath>
+		<relativePath>../esb-parent/pom.xml</relativePath>
 	</parent>
 	<artifactId>esb-database</artifactId>
 	<name>${project.artifactId}</name>
@@ -90,21 +90,44 @@
 			<artifactId>commons-dbcp</artifactId>
 			<version>1.4</version>
 		</dependency>
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-entitymanager</artifactId>
-			<version>4.2.0.Final</version>
-		</dependency>
 	</dependencies>
 
 	<build>
 		<defaultGoal>install</defaultGoal>
 		<plugins>
-			<!-- <plugin> <groupId>org.codehaus.mojo</groupId> <artifactId>openjpa-maven-plugin</artifactId> <version>1.2</version> <configuration> <includes>com/boohoo/esb/database/dao/model/*.class</includes> 
-				<addDefaultConstructor>true</addDefaultConstructor> <enforcePropertyRestrictions>true</enforcePropertyRestrictions> </configuration> <executions> <execution> 
-				<id>enhancer</id> <phase>process-classes</phase> <goals> <goal>enhance</goal> </goals> </execution> </executions> <dependencies> <dependency> <groupId>org.apache.openjpa</groupId> 
-				<artifactId>openjpa</artifactId> <version>2.0.1</version> </dependency> <dependency> <groupId>commons-logging</groupId> <artifactId>commons-logging</artifactId> 
-				<version>${commons-logging-version}</version> </dependency> </dependencies> </plugin> -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>openjpa-maven-plugin</artifactId>
+				<version>1.2</version>
+				<configuration>
+					<includes>com/boohoo/esb/database/dao/model/*.class</includes>
+					<addDefaultConstructor>true</addDefaultConstructor>
+					<enforcePropertyRestrictions>true</enforcePropertyRestrictions>
+				</configuration>
+				<executions>
+					<execution>
+						<id>enhancer</id>
+						<phase>process-classes</phase>
+						<goals>
+							<goal>enhance</goal>
+						</goals>
+					</execution>
+				</executions>
+
+				<dependencies>
+					<dependency>
+						<groupId>org.apache.openjpa</groupId>
+						<artifactId>openjpa</artifactId>
+						<version>2.0.1</version>
+					</dependency>
+					<dependency>
+						<groupId>commons-logging</groupId>
+						<artifactId>commons-logging</artifactId>
+						<version>${commons-logging-version}</version>
+					</dependency>
+				</dependencies>
+
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -161,7 +184,7 @@
 				<configuration>
 					<scriptdirectory>src/main/resources/scripts/Tables</scriptdirectory>
 					<driver>com.mysql.jdbc.Driver</driver>
-					<url>jdbc:mysql://localhost:3306/ServiceMix</url>
+					<url>jdbc:mysql://localhost:3306/test</url>
 					<userid>root</userid>
 					<password>welcome1</password>
 					<dbms>mysql</dbms>
@@ -169,32 +192,10 @@
 					<delimiterType>normal</delimiterType>
 				</configuration>
 				<!-- Kicks of during maven:test -->
-				<executions>
-					<execution>
-						<id>create-tables</id>
-						<phase>process-test-resources</phase>
-						<goals>
-							<goal>update</goal>
-						</goals>
-						<configuration>
-							<scriptdirectory>src/main/resources/scripts/Tables</scriptdirectory>
-							<delimiter>;</delimiter>
-							<delimiterType>normal</delimiterType>
-						</configuration>
-					</execution>
-					<execution>
-						<id>create-procedures</id>
-						<phase>process-test-resources</phase>
-						<goals>
-							<goal>update</goal>
-						</goals>
-						<configuration>
-							<scriptdirectory>src/main/resources/scripts/StoredProcedures</scriptdirectory>
-							<delimiter>$$</delimiter>
-							<delimiterType>normal</delimiterType>
-						</configuration>
-					</execution>
-				</executions>
+				<!-- <executions> <execution> <id>create-tables</id> <phase>process-test-resources</phase> <goals> <goal>update</goal> </goals> <configuration> <scriptdirectory>src/main/resources/scripts/Tables</scriptdirectory> 
+					<delimiter>;</delimiter> <delimiterType>normal</delimiterType> </configuration> </execution> <execution> <id>create-procedures</id> <phase>process-test-resources</phase> 
+					<goals> <goal>update</goal> </goals> <configuration> <scriptdirectory>src/main/resources/scripts/StoredProcedures</scriptdirectory> <delimiter>$$</delimiter> 
+					<delimiterType>normal</delimiterType> </configuration> </execution> </executions> -->
 				<dependencies>
 					<dependency>
 						<groupId>mysql</groupId>
@@ -244,7 +245,7 @@
 		</plugins>
 		<pluginManagement>
 			<plugins>
-				<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself. -->
+				<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
 				<plugin>
 					<groupId>org.eclipse.m2e</groupId>
 					<artifactId>lifecycle-mapping</artifactId>
@@ -259,19 +260,6 @@
 										<versionRange>[1.5,)</versionRange>
 										<goals>
 											<goal>execute</goal>
-										</goals>
-									</pluginExecutionFilter>
-									<action>
-										<ignore></ignore>
-									</action>
-								</pluginExecution>
-								<pluginExecution>
-									<pluginExecutionFilter>
-										<groupId>com.dbdeploy</groupId>
-										<artifactId>maven-dbdeploy-plugin</artifactId>
-										<versionRange>[3.0M3,)</versionRange>
-										<goals>
-											<goal>update</goal>
 										</goals>
 									</pluginExecutionFilter>
 									<action>
