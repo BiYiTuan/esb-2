@@ -12,6 +12,7 @@ import static org.ops4j.pax.exam.CoreOptions.systemPackages;
 
 import javax.inject.Inject;
 
+import org.apache.karaf.features.Feature;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.ops4j.pax.exam.Option;
@@ -35,7 +36,6 @@ import org.osgi.framework.BundleContext;
 public class SetupTest extends KarafTestSupport {
 
 	private static final String SPRING_VERSION = "3.1.3.RELEASE";
-	public static final String MIME_BUNDLE_SN = "org.apache.sling.commons.mime";
 	@Inject
 	BundleContext ctx;
 	// pax exam configuration, what to provision etc.
@@ -44,41 +44,26 @@ public class SetupTest extends KarafTestSupport {
 	public Option[] config() {
 		return options(
 				karafDistributionConfiguration().frameworkUrl(
-			            maven().groupId("org.apache.karaf").artifactId("apache-karaf").type("zip").version("2.3.1"))
-			            .karafVersion("2.3.1").name("Apache Karaf"),
+			            maven().groupId("org.apache.karaf").artifactId("apache-karaf").type("tar.gz").version(getKarafVersion()))
+			            .karafVersion(getKarafVersion()).name("Apache Karaf"),
 				junitBundles(),
-				systemPackages("javax.servlet"),
-				provision(
-						scanFeatures(maven().groupId("com.boohoo")
-								.artifactId("fuse-database-features").version("0.0.1-SNAPSHOT")
-								.classifier("features").type("xml"),
-								"boohoo-esb-database-dependencies"),
-						mavenBundle().groupId("org.springframework")
-								.artifactId("spring-context")
-								.version(SPRING_VERSION),
-						mavenBundle().groupId("org.springframework")
-								.artifactId("spring-beans")
-								.version(SPRING_VERSION),
-						mavenBundle().groupId("org.springframework")
-								.artifactId("spring-core")
-								.version(SPRING_VERSION),
-						mavenBundle().groupId("org.springframework")
-								.artifactId("spring-tx")
-								.version(SPRING_VERSION),
-						mavenBundle().groupId("org.springframework")
-								.artifactId("spring-jdbc")
-								.version(SPRING_VERSION)));
+				systemPackages("javax.servlet")
+			);
+	}
+
+	private String getKarafVersion() {
+		return "2.3.0.fuse-71-047";
 	}
 
 	@Test
-	public void testBundleStarted() {
-		assertNotNull("Expecting BundleContext to be supplied", ctx);
+	public void testBundleStarted() throws Exception {
+		System.out.println(executeCommand("features:addurl mvn:com.boohoo.esb/esb-features/1.0.0-SNAPSHOT/xml/features"));
+		String featureName = "esb-common";
+		System.out.println(executeCommand("features:install esb-common"));
+		Feature feature = featureService.getFeature(featureName);
 		
-		Bundle[] bundles = ctx.getBundles();
-		for (Bundle bundle : bundles) {
-			System.out.println(bundle.getSymbolicName() + " - "
-					+ bundle.getState());
-		}
+		assertNotNull("Features not install : " + featureName, feature);
+		executeCommand("features:list");
 	}
 
 }

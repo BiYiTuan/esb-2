@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
-Bnd-LastModified: 1380656184916
-Build-Jdk: 1.6.0_51
-Built-By: ramesh
+Bnd-LastModified: 1382523684452
+Build-Jdk: 1.6.0_43
+Built-By: ramesh.rajendran
 Bundle-ManifestVersion: 2
 Bundle-Name: esb-common
 Bundle-SymbolicName: com.boohoo.esb.esb-common

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
 
@@ -9,31 +10,44 @@
 	<version>1.0.0-SNAPSHOT</version>
 
 	<name>${project.artifactId}</name>
-	
+
 	<modules>
+		<module>esb-activemq</module>
 		<module>esb-common</module>
-		<module>esb-mongodb</module>
+		<module>esb-database</module> 
+		<module>esb-mongodb</module> 
 		<module>esb-mybatis</module>
-		<module>esb-database</module>
 		<module>esb-features</module>
-		<module>esb-test</module>
+		<module>esb-maxmind</module>
 	</modules>
-	
+
 	<properties>
 		<private-package>com.boohoo.esb.*</private-package>
 		<osgi-import>*</osgi-import>
 		<camel-version>2.10.0.fuse-71-047</camel-version>
 		<slf4j-version>1.6.6</slf4j-version>
 		<log4j-version>1.2.17</log4j-version>
+		<junit-version>4.8.1</junit-version>
 		<org.apache.servicemix.bundles.commons-dbcp.version>1.4_3</org.apache.servicemix.bundles.commons-dbcp.version>
-		<mysql-connector-java.version>5.1.24</mysql-connector-java.version>
+		<mysql-connector-java-version>5.1.24</mysql-connector-java-version>
 		<commons-pool-version>1.5.4</commons-pool-version>
-		<spring.version>3.1.3.RELEASE</spring.version>
+		<spring.version>3.1.4.RELEASE</spring.version>
 		<openjpa.version>2.2.1</openjpa.version>
 		<commons-logging-version>1.1.2</commons-logging-version>
-		<joda.time.version>2.2</joda.time.version>
+		<jodatime-version>2.2</jodatime-version>
 		<depends-maven-plugin>1.2</depends-maven-plugin>
-		<xstream.version>1.4.4_1</xstream.version>
+		<xstream-version>1.4.4_1</xstream-version>
+		<commons-dbcp-version>1.4</commons-dbcp-version>
+		<spring-version>3.0.7.RELEASE</spring-version>
+		<cxf-version>2.6.0.fuse-71-047</cxf-version>
+		<activemq-version>5.7.0.fuse-71-047</activemq-version>
+		<org.apache.servicemix.bundles.serp-version>1.14.1_1</org.apache.servicemix.bundles.serp-version>
+		<org.apache.servicemix.specs.java-persistence-api-2.0-version>2.2.0</org.apache.servicemix.specs.java-persistence-api-2.0-version>
+		<spring-osgi-core-version>1.2.1</spring-osgi-core-version>
+		<database-driver-name>com.mysql.jdbc.Driver</database-driver-name>
+		<database-url>jdbc:mysql://localhost:3306/test</database-url>
+		<database-userid>test</database-userid>
+		<database-password>welcome1</database-password>
 	</properties>
 
 	<dependencies>
@@ -62,7 +76,7 @@
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
-			<version>1.6.6</version>
+			<version>${slf4j-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
@@ -96,22 +110,18 @@
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.24</version>
+			<version>${mysql-connector-java-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.servicemix.bundles</groupId>
 			<artifactId>org.apache.servicemix.bundles.xstream</artifactId>
-			<version>1.4.4_1</version>
+			<version>${xstream-version}</version>
 			<type>bundle</type>
 		</dependency>
 	</dependencies>
-	
-
-
 
 	<build>
 		<defaultGoal>install</defaultGoal>
-
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -161,7 +171,7 @@
 		</plugins>
 	</build>
 
-	
+
 	<repositories>
 		<repository>
 			<id>release.fusesource.org</id>
