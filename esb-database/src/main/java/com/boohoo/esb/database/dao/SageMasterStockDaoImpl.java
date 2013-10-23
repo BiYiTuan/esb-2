@@ -12,12 +12,11 @@ import com.boohoo.esb.database.dao.model.SageMasterStock;
 @Transactional(readOnly=true)
 public class SageMasterStockDaoImpl extends JpaBaseDao<SageMasterStock, Integer> implements SageMasterStockDao {
 	@Transactional(propagation=Propagation.REQUIRES_NEW)
-	public Integer updateSageStock(SageMasterStock masterStock) {
-		return entityManager.merge(masterStock).getId();
+	public SageMasterStock updateSageStock(SageMasterStock masterStock) {
+		return entityManager.merge(masterStock);
 	}
 	
 	public List<SageMasterStock> findAll(){
-		List<SageMasterStock>  resultList = entityManager.createNativeQuery("call GetAllSageMasterStock()", SageMasterStock.class).getResultList();
-		return resultList;
+		return null;
 	}
 }

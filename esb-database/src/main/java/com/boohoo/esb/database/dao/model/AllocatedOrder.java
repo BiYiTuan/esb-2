@@ -3,14 +3,17 @@ package com.boohoo.esb.database.dao.model;
 import java.io.Serializable;
 import javax.persistence.*;
 
-
 /**
  * The persistent class for the AllocatedOrders database table.
+ * 
  * @author ramesh
  */
 @Entity
-@Table(name="AllocatedOrders")
-@NamedNativeQueries(@NamedNativeQuery(name="allocatedOrder.CreateAllocatedOrder",query="call CreateAllocatedOrder(?1,?2,?3)"))
+@Table(name = "AllocatedOrders")
+@NamedNativeQueries(@NamedNativeQuery(name = "allocatedOrder.CreateAllocatedOrder", 
+		query = "call CreateAllocatedOrder(?1,?2,?3)",
+		 resultClass = AllocatedOrder.class
+		))
 public class AllocatedOrder implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private int id;
@@ -20,10 +23,9 @@ public class AllocatedOrder implements Serializable {
 	public AllocatedOrder() {
 	}
 
-
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(unique=true, nullable=false)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(unique = true, nullable = false)
 	public int getId() {
 		return this.id;
 	}
@@ -32,8 +34,7 @@ public class AllocatedOrder implements Serializable {
 		this.id = id;
 	}
 
-
-	@Column(nullable=false, length=50)
+	@Column(nullable = false, length = 50)
 	public String getOrderNumber() {
 		return this.orderNumber;
 	}
@@ -42,8 +43,7 @@ public class AllocatedOrder implements Serializable {
 		this.orderNumber = orderNumber;
 	}
 
-
-	@Column(nullable=false)
+	@Column(nullable = false)
 	public int getStatus() {
 		return this.status;
 	}
