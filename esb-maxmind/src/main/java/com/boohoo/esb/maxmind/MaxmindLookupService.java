@@ -11,7 +11,7 @@ public class MaxmindLookupService {
 	public MaxmindLookupService() throws IOException {
 		LookupService cl = new LookupService("src/main/resources/maxmind/GeoLiteCity.dat",
                 LookupService.GEOIP_MEMORY_CACHE );
-		 Location l1 = cl.getLocation("212.25.232.151");
+		 Location l1 = cl.getLocation("fr.boohoo.com");
 		 System.out.println(l1.countryName);
 	}
 	

@@ -13,6 +13,9 @@
 	<bean id="jsonPrettyPrintedDriver" class="com.thoughtworks.xstream.io.json.JsonHierarchicalStreamDriver" />
 	<bean id="jsonDriver" class="com.thoughtworks.xstream.io.json.JettisonMappedXmlDriver" />
 
+	<bean id="lookupService" class="com.maxmind.geoip.LookupService">
+		<argument  value="src/main/resources/maxmind/GeoLiteCity.dat"/>
+	</bean>
 	
 	<camelContext id="esb-maxmind" xmlns="http://camel.apache.org/schema/blueprint">
 		<dataFormats>
@@ -21,7 +24,12 @@
 			        <alias class="com.boohoo.esb.common.entity.Order" name="order" />
 			    </aliases>
 			</xstream>
-		</dataFormats>		
+		</dataFormats>	
+		<route>
+			<from uri="timer:foo?delay=500&amp;repeatCount=2"/>
+			<to uri="maxmind://lookupService?query=213.52.50.8" />
+			<log message="${body}" />
+		</route>	
 	</camelContext>
 
 </blueprint>
