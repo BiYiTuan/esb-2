@@ -27,7 +27,7 @@
 		</dataFormats>	
 		<route>
 			<from uri="timer:foo?delay=500&amp;repeatCount=2"/>
-			<to uri="maxmind://lookupService?query=213.52.50.8" />
+			<to uri="maxmind://lookupService?query=cloudio.com" />
 			<log message="${body}" />
 		</route>	
 	</camelContext>
