@@ -1,5 +1,5 @@
 DROP procedure if exists CreateOrUpdateStockUpdateHistory ; 
-$$
+\\
 CREATE PROCEDURE CreateOrUpdateStockUpdateHistory(sku VARCHAR(50), quantity INT, 
 updatedDateTime VARCHAR(50), reasonForChange VARCHAR(50), OUT outId INT)
 BEGIN
@@ -16,4 +16,4 @@ IF (@lastQuantity <> quantity) THEN
 END IF;
 
 END 
-$$
+\\

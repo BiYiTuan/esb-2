@@ -100,30 +100,6 @@
 	<build>
 		<defaultGoal>install</defaultGoal>
 		<plugins>
-			<!-- <plugin> <groupId>org.codehaus.mojo</groupId> <artifactId>openjpa-maven-plugin</artifactId> <version>1.2</version> <configuration> <includes>com/boohoo/esb/database/dao/model/*.class</includes> 
-				<addDefaultConstructor>true</addDefaultConstructor> <enforcePropertyRestrictions>true</enforcePropertyRestrictions> </configuration> <executions> <execution> 
-				<id>enhancer</id> <phase>process-classes</phase> <goals> <goal>enhance</goal> </goals> </execution> </executions> <dependencies> <dependency> <groupId>org.apache.openjpa</groupId> 
-				<artifactId>openjpa</artifactId> <version>2.0.1</version> </dependency> <dependency> <groupId>commons-logging</groupId> <artifactId>commons-logging</artifactId> 
-				<version>${commons-logging-version}</version> </dependency> </dependencies> </plugin> -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>2.5.1</version>
-				<configuration>
-					<source>1.6</source>
-					<target>1.6</target>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-resources-plugin</artifactId>
-				<version>2.4.3</version>
-				<configuration>
-					<encoding>UTF-8</encoding>
-				</configuration>
-			</plugin>
-
-			<!-- to generate the MANIFEST-FILE of the bundle -->
 			<plugin>
 				<groupId>org.apache.felix</groupId>
 				<artifactId>maven-bundle-plugin</artifactId>
@@ -131,17 +107,14 @@
 				<extensions>true</extensions>
 				<configuration>
 					<instructions>
-						<Bundle-SymbolicName>${project.groupId}-${project.artifactId}</Bundle-SymbolicName>
-						<Private-Package>com.boohoo.esb.database.daa.*</Private-Package>
-						<Export-Package>com.boohoo.esb.database.dao.*</Export-Package>
-						<DynamicImport-Package>*</DynamicImport-Package>
-						<Import-Package>${osgi.import}</Import-Package>
+						<Bundle-SymbolicName>${project.groupId}.${project.artifactId}</Bundle-SymbolicName>
+						<Private-Package>${private-package}</Private-Package>
+						<Import-Package>${osgi-import}</Import-Package>
+						<Export-Package>${private-package}</Export-Package>
 						<Export-Service>${osgi.export.service}</Export-Service>
 					</instructions>
 				</configuration>
 			</plugin>
-
-			<!-- to run the example using mvn camel:run -->
 			<plugin>
 				<groupId>org.apache.camel</groupId>
 				<artifactId>camel-maven-plugin</artifactId>
@@ -150,9 +123,6 @@
 					<useBlueprint>true</useBlueprint>
 				</configuration>
 			</plugin>
-			<!-- <plugin> <groupId>org.apache.karaf.tooling</groupId> <artifactId>features-maven-plugin</artifactId> <version>2.2.11</version> <executions> <execution> 
-				<id>generate-features</id> <phase>package</phase> <goals> <goal>generate-features-xml</goal> </goals> <inherited>false</inherited> </execution> </executions> 
-				</plugin> -->
 			<plugin>
 				<groupId>com.dbdeploy</groupId>
 				<artifactId>maven-dbdeploy-plugin</artifactId>
@@ -190,7 +160,7 @@
 						</goals>
 						<configuration>
 							<scriptdirectory>src/main/resources/scripts/StoredProcedures</scriptdirectory>
-							<delimiter>$$</delimiter>
+							<delimiter>\\</delimiter>
 							<delimiterType>normal</delimiterType>
 						</configuration>
 					</execution>
@@ -282,6 +252,7 @@
 						</lifecycleMappingMetadata>
 					</configuration>
 				</plugin>
+
 			</plugins>
 		</pluginManagement>
 	</build>

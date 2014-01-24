@@ -1,4 +1,4 @@
-DROP procedure if exists ClearDataForChannelStockUpdateHistory ; $$
+DROP procedure if exists ClearDataForChannelStockUpdateHistory ; \\
 CREATE PROCEDURE ClearDataForChannelStockUpdateHistory(frontend VARCHAR(50))
 BEGIN
 
@@ -8,4 +8,4 @@ PREPARE deleteStatement FROM @deleteTable;
 EXECUTE deleteStatement;
 
 END 
-$$
+\\

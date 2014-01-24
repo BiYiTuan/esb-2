@@ -1,5 +1,5 @@
 DROP procedure if exists GetIncorrectInventoryFor ; 
-$$
+\\
 CREATE PROCEDURE GetIncorrectInventoryFor(frontend VARCHAR(50))
 BEGIN
 
@@ -13,4 +13,4 @@ PREPARE getStatement FROM @getData;
 EXECUTE getStatement;
 
 END 
-$$
+\\

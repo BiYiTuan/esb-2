@@ -1,5 +1,5 @@
 DROP procedure if exists UpdateAllocatedOrderLinesStatus ; 
-$$
+\\
 
 CREATE PROCEDURE UpdateAllocatedOrderLinesStatus(orderStatus INT, allocatedOrderId  INT, sku VARCHAR(50), quantity INT)
 BEGIN
@@ -10,4 +10,4 @@ AND Sku = sku
 AND Quantity = quantity;
 END 
 
-$$
+\\
