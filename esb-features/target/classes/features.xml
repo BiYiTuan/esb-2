@@ -49,7 +49,7 @@
 	</feature>
 	
 	<feature name="esb-activemq" version="1.0.0-SNAPSHOT">
-		<feature>activemq</feature>
+		<feature version="5.7.0.fuse-71-047">activemq</feature>
 		<bundle>mvn:com.boohoo.esb/esb-activemq/1.0.0-SNAPSHOT</bundle>
 	</feature>
 	

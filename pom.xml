@@ -12,8 +12,9 @@
 	<name>${project.artifactId}</name>
 
 	<modules>
-		<module>esb-activemq</module>
+		
 		<module>esb-common</module>
+		<module>esb-activemq</module>
 		<module>esb-database</module> 
 		<module>esb-mongodb</module> 
 		<module>esb-mybatis</module>
@@ -45,7 +46,7 @@
 		<org.apache.servicemix.specs.java-persistence-api-2.0-version>2.2.0</org.apache.servicemix.specs.java-persistence-api-2.0-version>
 		<spring-osgi-core-version>1.2.1</spring-osgi-core-version>
 		<database-driver-name>com.mysql.jdbc.Driver</database-driver-name>
-		<database-url>jdbc:mysql://localhost:3306/test</database-url>
+		<database-url>jdbc:mysql://localhost:3306/ESB</database-url>
 		<database-userid>test</database-userid>
 		<database-password>welcome1</database-password>
 	</properties>

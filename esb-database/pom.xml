@@ -131,7 +131,7 @@
 				<configuration>
 					<scriptdirectory>src/main/resources/scripts/Tables</scriptdirectory>
 					<driver>com.mysql.jdbc.Driver</driver>
-					<url>jdbc:mysql://localhost:3306/ServiceMix</url>
+					<url>jdbc:mysql://localhost:3306/ESB</url>
 					<userid>root</userid>
 					<password>welcome1</password>
 					<dbms>mysql</dbms>
@@ -189,7 +189,7 @@
 
 				<configuration>
 					<driver>com.mysql.jdbc.Driver</driver>
-					<url>jdbc:mysql://localhost:3306/test</url>
+					<url>jdbc:mysql://localhost:3306/ESB</url>
 					<username>root</username>
 					<password>welcome1</password>
 					<settingsKey>sensibleKey</settingsKey>

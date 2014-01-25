@@ -10,6 +10,22 @@
 
 	<cm:property-placeholder persistent-id="com.boohoo.esb.mongodb" />
 
+	<reference interface="javax.jms.ConnectionFactory" id="jmsConnectionFactory"/>
+	
+	<bean id="pooledConnectionFactory" class="org.apache.activemq.pool.PooledConnectionFactory"
+		init-method="start" destroy-method="stop">
+		<property name="maxConnections" value="8" />
+		<property name="connectionFactory" ref="jmsConnectionFactory" />
+	</bean>
+
+	<bean id="jmsConfig" class="org.apache.camel.component.jms.JmsConfiguration">
+		<property name="connectionFactory" ref="pooledConnectionFactory" />
+		<property name="concurrentConsumers" value="10" />
+	</bean>
+
+	<bean id="activemq" class="org.apache.activemq.camel.component.ActiveMQComponent">
+		<property name="configuration" ref="jmsConfig" />
+	</bean>
 	
 	<bean id="orderService" class="com.boohoo.esb.mongodb.service.OrderService" />
 
@@ -36,6 +52,7 @@
 			</transform>
 			<log message="Inserting : ${body}" />
 			<to uri="mongodb:mydb?database={{mongodb.databaseName}}&amp;collection={{mongodb.collections.orders}}&amp;operation=save&amp;writeConcern=SAFE&amp;createCollection=true" />
+			<to uri="activemq:queue.mongodb"/>
 		</route>
 		
 		<route id="order-count-mongodb" autoStartup="false">

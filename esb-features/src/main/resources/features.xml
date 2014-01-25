@@ -49,7 +49,7 @@
 	</feature>
 	
 	<feature name="esb-activemq" version="${project.version}">
-		<feature>activemq</feature>
+		<feature version="${activemq-version}">activemq</feature>
 		<bundle>mvn:${project.groupId}/esb-activemq/${project.version}</bundle>
 	</feature>
 	
