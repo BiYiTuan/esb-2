@@ -2,7 +2,7 @@
 	<repository>mvn:org.apache.camel.karaf/apache-camel/${camel-version}/xml/features</repository>
 	<repository>mvn:org.apache.cxf.karaf/apache-cxf/${cxf-version}/xml/features</repository>
 	<!-- <repository>mvn:org.apache.activemq/activemq-karaf/${activemq-version}/xml/features</repository> -->
-	
+
 	<feature name="spring-dependencies" version="${spring-version}">
 		<bundle>mvn:org.springframework/spring-orm/${spring-version}</bundle>
 		<bundle>mvn:org.springframework/spring-oxm/${spring-version}</bundle>
@@ -12,12 +12,12 @@
 	<feature name="mysql-connector-java" version="${mysql-connector-java-version}">
 		<bundle>mvn:mysql/mysql-connector-java/${mysql-connector-java-version}</bundle>
 	</feature>
-	
+
 	<feature name="joda-time" version="${jodatime-version}">
 		<bundle>mvn:joda-time/joda-time/${jodatime-version}</bundle>
 	</feature>
 	<feature name="esb-database-dependencies" version="${project.version}">
-		<feature version="${spring-version}">spring-dependencies</feature>
+		<feature>spring</feature>
 		<feature version="${mysql-connector-java-version}">mysql-connector-java</feature>
 		<feature version="${jodatime-version}">joda-time</feature>
 	</feature>
@@ -26,31 +26,24 @@
 		<feature version="${camel-version}">camel-xstream</feature>
 		<feature version="${camel-version}">camel-mybatis</feature>
 		<feature version="${camel-version}">camel-mongodb</feature>
-		
+
 		<bundle>mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.xstream/${xstream-version}</bundle>
 		<bundle>mvn:commons-dbcp/commons-dbcp/${commons-dbcp-version}</bundle>
 		<bundle>mvn:${project.groupId}/esb-common/${project.version}</bundle>
 	</feature>
-	<feature name="esb-mybatis" version="${project.version}">
-		<feature version="${project.version}">esb-common</feature>
-		<bundle>mvn:${project.groupId}/esb-mybatis/${project.version}</bundle>
-	</feature>
+
 	<feature name="esb-mongodb" version="${project.version}">
 		<feature version="${project.version}">esb-common</feature>
 		<bundle>mvn:${project.groupId}/esb-mongodb/${project.version}</bundle>
 	</feature>
-	<feature name="esb-database" version="${project.version}">
-		<feature version="${project.version}">esb-common</feature>
-		<bundle>mvn:${project.groupId}/esb-database/${project.version}</bundle>
-	</feature>
-	
+
 	<feature name="esb-test" version="${project.version}">
 		<bundle>mvn:${project.groupId}/esb-test/${project.version}</bundle>
 	</feature>
-	
+
 	<feature name="esb-activemq" version="${project.version}">
 		<feature version="${activemq-version}">activemq</feature>
 		<bundle>mvn:${project.groupId}/esb-activemq/${project.version}</bundle>
 	</feature>
-	
+
 </features>
